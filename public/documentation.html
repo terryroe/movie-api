@@ -50,22 +50,22 @@
           <td>
             <pre>
 [
-    {
-        "title": "Pulp Fiction",
-        "genre": {
-            "name": "Drama",
-            "desc": "The drama genre is defined by..."
-        },
-        "description": "The lives of two mob hitmen,...",
-        "director": {
-            "name": "Quentin Tarantino",
-            "bio": "Quentin Jerome Tarantino was born in...",
-            "birthday": "March 27, 1963"
-        },
-        "imageUrl": "https://www.imdb.com/...",
-        "featured": true
+  {
+    "Title": "Pulp Fiction",
+    "Genre": {
+      "Name": "Drama",
+      "Description": "The drama genre is defined by..."
     },
-    ...
+    "Description": "The lives of two mob hitmen,...",
+    "Director": {
+      "Name": "Quentin Tarantino",
+      "Bio": "Quentin Jerome Tarantino was born in...",
+      "Birthday": "March 27, 1963"
+    },
+    "ImagePath": "pulpfiction.png",
+    "Featured": true
+  },
+  ...
 ]
             </pre>
           </td>
@@ -75,28 +75,29 @@
             Return data (description, genre, director, image URL, whether it's
             featured or not) about a single movie by title to the user
           </td>
-          <td>/movies/:title</td>
+          <td>/movies/:Title</td>
           <td>GET</td>
-          <td>:title - title of the movie to retrieve</td>
+          <td>:Title - title of the movie to retrieve</td>
           <td>-none-</td>
           <td>JSON of a single movie object</td>
           <td>/movies/Casablanca</td>
           <td>
             <pre>
 {
-    "title": "Casablanca",
-    "genre": {
-        "name": "Romance",
-        "desc": "The romance genre is defined by..."
-    },
-    "description": "A cynical expatriate American cafe owner...",
-    "director": {
-        "name": "Michael Curtiz",
-        "bio": "Curtiz began acting in and then directing...",
-        "birthday": "December 24, 1886"
-    },
-    "imageUrl": "https://www.imdb.com/...",
-    "featured": false
+  "Title": "Casablanca",
+  "Genre": {
+    "Name": "Romance",
+    "Description": "The romance genre is defined by..."
+  },
+  "Description": "A cynical expatriate American cafe owner...",
+  "Director": {
+    "Name": "Michael Curtiz",
+    "Bio": "Curtiz began acting in and then directing...",
+    "Birthday": "1886",
+    "Death": "1962"
+  },
+  "ImageUrl": "casablanca.png",
+  "Featured": false
 }
             </pre>
           </td>
@@ -106,17 +107,17 @@
             Return data about a genre (description) by name/title (e.g.,
             “Thriller”)
           </td>
-          <td>/movies/genre/:genre</td>
+          <td>/movies/genre/:Name</td>
           <td>GET</td>
-          <td>:genre - name of the genre to retrieve</td>
+          <td>:Name - name of the genre to retrieve</td>
           <td>-none-</td>
           <td>JSON of a single genre</td>
           <td>/movies/genre/Drama</td>
           <td>
             <pre>
 {
-    "name": "Drama",
-    "desc": "The drama genre is defined by conflict..."
+  "Name": "Drama",
+  "Description: "The drama genre is defined by conflict..."
 }
             </pre>
           </td>
@@ -126,17 +127,20 @@
           <td>
             Return data about a director (bio, birth year, death year) by name
           </td>
-          <td>/movies/directors/:name</td>
+          <td>/movies/directors/:Name</td>
           <td>GET</td>
-          <td>:name - the director's name</td>
+          <td>:Name - the director's name</td>
           <td>-none-</td>
           <td>JSON object with director's details</td>
           <td>/movies/director/Michael%20Curtiz</td>
           <td>
             <pre>
 {
-    "name": "Michael Curtiz",
-    "bio": "Curtiz began acting in and then directing films...", "birthday": "December 24, 1886" }
+  "Name": "Michael Curtiz",
+  "Bio": "Curtiz began acting in and then directing films...",
+  "Birth": "1886", 
+  "Death": "1962"
+}
             </pre>
           </td>
         </tr>
@@ -145,50 +149,62 @@
           <td>/users</td>
           <td>POST</td>
           <td>-none-</td>
-          <td>JSON Object with new user's name</td>
+          <td>JSON Object with new user's name, password, email, birthday</td>
           <td>JSON Object with new user's details</td>
           <td>
             /users
             <pre>
 Request Body
 {
-    "name": "New User"
+  "Username": "New User", (required)
+  "Password": "password", (required)
+  "Email": "mail@email.com", (required)
+  "Birthday": "1900-01-01"
 }
             </pre>
           </td>
           <td>
             <pre>
 {
-    "name": "New User",
-    "id": "08912a01-319e-437d-bcf5-6bbcb6fee06c",
-    "favoriteMovies": []
+  "_id": "08912a01-319e-437d-bcf5-6bbcb6fee06c",
+  "Username": "New User",
+  "Passwrod": "password",
+  "Email": "mail@email.com"
+  "Birthday": "1900-01-01"
+  "FavoriteMovies": []
 }
             </pre>
           </td>
         </tr>
 
         <tr>
-          <td>Allow users to update their user info (username)</td>
-          <td>/users/:id</td>
+          <td>Allow users to update their user info</td>
+          <td>/users/:Username</td>
           <td>PUT</td>
-          <td>:id - ID of user to be updated</td>
+          <td>:Username - Username of user to be updated</td>
           <td>JSON object with user's new name</td>
           <td>JSON object with user's details</td>
           <td>
-            /users/2
+            /users/Joe
             <pre>
 Request Body
 {
-  "name": "Joe Updated"
+  "Name": "Joe Updated",
+  "Password": "newpassword",
+  "Email": "new@email.com",
+  "Birthday": "1900-01-01"
 }
             </pre>
           </td>
           <td>
             <pre>
 {
-    "id": 1,
-    "name": "Joe Updated",
-    "favoriteMovies": []
+  "_id": "08912a01-319e-437d-bcf5-6bbcb6fee06c",
+  "name": "Joe Updated",
+  "Password": "newpassword",
+  "Email": "new@email.com",
+  "Birthday": "1900-01-01",
+  "FavoriteMovies": []
 }              
             </pre>
           </td>
@@ -198,30 +214,54 @@ Request Body
             Allow users to add a movie to their list of favorites (showing only
             a text that a movie has been added)
           </td>
-          <td>/users/:id/:title</td>
+          <td>/users/:Username/movies/:MovieID</td>
           <td>POST</td>
           <td>
-            <p>:id - user's ID</p>
-            <p>:title - title of movie to add</p>
+            <p>:Username - user's Username</p>
+            <p>:MovieID - ObjectID of movie to add</p>
           </td>
           <td>-none-</td>
-          <td>Text message that movie was added.</td>
-          <td>/users/1/Titanic</td>
-          <td>Titanic has been added to the user's favorites.</td>
+          <td>JSON object with user's detail, including new favorite movie</td>
+          <td>/users/Joe/movie/649f103ab9afff41ddb545c0</td>
+          <td>
+            <pre>
+{
+  "_id": "08912a01-319e-437d-bcf5-6bbcb6fee06c",
+  "name": "Joe",
+  "Password": "password",
+  "Email": "mail@email.com",
+  "Birthday": "1900-01-01",
+  "FavoriteMovies": ["649f103ab9afff41ddb545c0"]
+}              
+            </pre>
+          </td>
         </tr>
         <tr>
           <td>
             Allow users to remove a movie from their list of favorites (showing
             only a text that a movie has been removed)
           </td>
-          <td>/users/:title</td>
+          <td>/users/:Username/movies/:MovieID</td>
           <td>DELETE</td>
-          <td>:title - Title of movie to be removed</td>
-          <td>-none-</td>
-          <td>Text message that movie was removed.</td>
-          <td>/users/2/The%20Lord%20of%20the%20Rings</td>
           <td>
-            The Lord of the Rings has been removed from the user's favorites.
+            <p>:Username - user's Username</p>
+            <p>:MovieID - ObjectID of movie to remove</p>
+          </td>
+
+          <td>-none-</td>
+          <td>JSON object with user's detail, including favorite movie list</td>
+          <td>/users/Joe/movies/649f103ab9afff41ddb545c0</td>
+          <td>
+            <pre>
+{
+  "_id": "08912a01-319e-437d-bcf5-6bbcb6fee06c",
+  "name": "Joe",
+  "Password": "password",
+  "Email": "mail@email.com",
+  "Birthday": "1900-01-01",
+  "FavoriteMovies": ["649f103ab9afff41ddb545c0"]
+}              
+            </pre>
           </td>
         </tr>
         <tr>
@@ -229,13 +269,13 @@ Request Body
             Allow existing users to deregister (showing only a text that a user
             email has been removed)
           </td>
-          <td>/users/:id</td>
+          <td>/users/:Username</td>
           <td>DELETE</td>
-          <td>:id - ID of user to remove</td>
+          <td>::Username - Username of user to remove</td>
           <td>-none-</td>
           <td>Text message that the user was removed.</td>
-          <td>/users/2</td>
-          <td>User has been removed.</td>
+          <td>/users/Joe</td>
+          <td>Joe has been removed.</td>
         </tr>
       </tbody>
     </table>
