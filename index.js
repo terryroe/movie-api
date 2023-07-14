@@ -26,7 +26,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(cors());
-// ***** This code doesn't seem to work for preventin access from unlisted
+// ***** This code doesn't seem to work for preventing access from unlisted
 // ***** domains.  So it is commented out in favor of the line just above.
 // const allowedOrigins = ['http://localhost:8080', 'http://testsite.com'];
 // app.use(
@@ -56,7 +56,8 @@ app.get('/', (req, res) => {
 // READ - returns all movies
 app.get(
   '/movies',
-  passport.authenticate('jwt', { session: false }),
+  // Temporarily allow access without authentication for Exercise 3.4.
+  // passport.authenticate('jwt', { session: false }),
   (req, res) => {
     Movies.find()
       .then((movies) => res.status(200).json(movies))
