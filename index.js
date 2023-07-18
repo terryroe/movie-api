@@ -56,8 +56,7 @@ app.get('/', (req, res) => {
 // READ - returns all movies
 app.get(
   '/movies',
-  // Temporarily allow access without authentication for Exercise 3.4.
-  // passport.authenticate('jwt', { session: false }),
+  passport.authenticate('jwt', { session: false }),
   (req, res) => {
     Movies.find()
       .then((movies) => res.status(200).json(movies))
