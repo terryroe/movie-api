@@ -13,6 +13,7 @@ mongoose.connect(process.env.CONNECTION_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
+// ***** Keep this local connection around for local development/testing.
 // mongoose.connect('mongodb://localhost:27017/cfDB', {
 //   useNewUrlParser: true,
 //   useUnifiedTopology: true,
