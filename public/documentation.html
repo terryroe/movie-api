@@ -156,7 +156,7 @@
             <pre>
 Request Body
 {
-  "Username": "New User", (required)
+  "Username": "NewUser", (required)
   "Password": "password", (required)
   "Email": "mail@email.com", (required)
   "Birthday": "1900-01-01"
@@ -167,7 +167,7 @@ Request Body
             <pre>
 {
   "_id": "08912a01-319e-437d-bcf5-6bbcb6fee06c",
-  "Username": "New User",
+  "Username": "NewUser",
   "Passwrod": "password",
   "Email": "mail@email.com"
   "Birthday": "1900-01-01"
@@ -189,7 +189,7 @@ Request Body
             <pre>
 Request Body
 {
-  "Name": "Joe Updated",
+  "Name": "JoeUpdated",
   "Password": "newpassword",
   "Email": "new@email.com",
   "Birthday": "1900-01-01"
@@ -200,7 +200,7 @@ Request Body
             <pre>
 {
   "_id": "08912a01-319e-437d-bcf5-6bbcb6fee06c",
-  "name": "Joe Updated",
+  "name": "JoeUpdated",
   "Password": "newpassword",
   "Email": "new@email.com",
   "Birthday": "1900-01-01",
@@ -222,7 +222,7 @@ Request Body
           </td>
           <td>-none-</td>
           <td>JSON object with user's detail, including new favorite movie</td>
-          <td>/users/Joe/movie/649f103ab9afff41ddb545c0</td>
+          <td>/users/Joe/movies/649f103ab9afff41ddb545c0</td>
           <td>
             <pre>
 {
@@ -271,11 +271,44 @@ Request Body
           </td>
           <td>/users/:Username</td>
           <td>DELETE</td>
-          <td>::Username - Username of user to remove</td>
+          <td>:Username - Username of user to remove</td>
           <td>-none-</td>
           <td>Text message that the user was removed.</td>
           <td>/users/Joe</td>
           <td>Joe has been removed.</td>
+        </tr>
+        <tr>
+          <td>Allow existing users to login</td>
+          <td>/login</td>
+          <td>POST</td>
+          <td>-none-</td>
+          <td>JSON object with user's username and password</td>
+          <td>JSON object with user's details, including JWT token</td>
+          <td>
+            /login
+            <pre>
+{
+  "Username": "username",
+  "Password": "password"
+}
+            </pre>
+          </td>
+          <td>
+            <pre>
+{
+  "user": {
+      "_id": "64adb796ae5d3737eaee5069",
+      "Username": "username",
+      "Password": "hashed password ...",
+      "Email": "username@email.com",
+      "Birthday": "1925-01-01T00:00:00.000Z",
+      "FavoriteMovies": [],
+      "__v": 0
+  },
+  "token": "..."
+}              
+            </pre>
+          </td>
         </tr>
       </tbody>
     </table>
