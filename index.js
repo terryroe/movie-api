@@ -50,11 +50,16 @@ let auth = require('./auth')(app);
 const passport = require('passport');
 require('./passport');
 
+/**
+ * Send back a greeting if someone tries to access the app root.
+ */
 app.get('/', (req, res) => {
   res.send('Welcome to my movie app.');
 });
 
-// READ - returns all movies
+/**
+ * READ - returns all movies
+ */
 app.get(
   '/movies',
   passport.authenticate('jwt', { session: false }),
@@ -68,7 +73,9 @@ app.get(
   }
 );
 
-// READ - returns one movie given the title
+/**
+ * READ - returns one movie given the title
+ */
 app.get(
   '/movies/:Title',
   passport.authenticate('jwt', { session: false }),
@@ -90,7 +97,9 @@ app.get(
   }
 );
 
-// READ - returns information on a director
+/**
+ * READ - returns information on a director
+ */
 app.get(
   '/movies/director/:Name',
   passport.authenticate('jwt', { session: false }),
@@ -112,7 +121,9 @@ app.get(
   }
 );
 
-// READ - returns information about a genre
+/**
+ * READ - returns information about a genre
+ */
 app.get(
   '/movies/genre/:Name',
   passport.authenticate('jwt', { session: false }),
@@ -134,7 +145,9 @@ app.get(
   }
 );
 
-// CREATE - add a new user to the list of users
+/**
+ * CREATE - add a new user to the list of users
+ */
 /* We'll expect JSON in this format
 {
   Username: String,
@@ -186,7 +199,9 @@ app.post(
   }
 );
 
-// GET - Get all users
+/**
+ * GET - Get all users
+ */
 app.get(
   '/users',
   passport.authenticate('jwt', { session: false }),
@@ -200,7 +215,9 @@ app.get(
   }
 );
 
-// GET - Get a user by Username
+/**
+ * GET - Get a user by Username
+ */
 app.get(
   '/users/:Username',
   passport.authenticate('jwt', { session: false }),
@@ -214,7 +231,9 @@ app.get(
   }
 );
 
-// UPDATE - Update a user's info, by Username
+/**
+ * UPDATE - Update a user's info, by Username
+ */
 /* We'll expect JSON in this format
 {
   Username: String, (required)
@@ -262,7 +281,9 @@ app.put(
   }
 );
 
-// CREATE - Add a new movie to user's favorites
+/**
+ * CREATE - Add a new movie to user's favorites
+ */
 app.post(
   '/users/:Username/movies/:MovieID',
   passport.authenticate('jwt', { session: false }),
@@ -282,7 +303,9 @@ app.post(
   }
 );
 
-// DELETE - Remove a movie from user's favorites
+/**
+ * DELETE - Remove a movie from user's favorites
+ */
 app.delete(
   '/users/:Username/movies/:MovieID',
   passport.authenticate('jwt', { session: false }),
@@ -302,7 +325,9 @@ app.delete(
   }
 );
 
-// DELETE - Remove a user
+/**
+ * DELETE - Remove a user
+ */
 app.delete(
   '/users/:Username',
   passport.authenticate('jwt', { session: false }),
@@ -324,7 +349,9 @@ app.delete(
   }
 );
 
-// Handle any errors that occur
+/**
+ * Handle any errors that occur
+ */
 app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500).send('An error occurred on the server.');
